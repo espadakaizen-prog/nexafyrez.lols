@@ -1,0 +1,205 @@
+/* ===================================
+   LOADING SCREEN STYLES
+   =================================== */
+
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: radial-gradient(circle at 50% 50%, var(--bg-dark) 0%, var(--bg-black) 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+.loading-screen::before {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 50% 50%, rgba(230, 57, 70, 0.05) 0%, transparent 40%);
+    animation: spinRing 20s linear infinite;
+    pointer-events: none;
+}
+
+.loading-screen.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.loading-content {
+    text-align: center;
+    animation: fadeInScale 1s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 1;
+}
+
+.loading-logo {
+    position: relative;
+    margin-bottom: 2.5rem;
+}
+
+.loading-logo-image {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto;
+    animation: logoLoadingPulse 3s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+    filter: drop-shadow(0 8px 24px rgba(230, 57, 70, 0.4));
+}
+
+@keyframes logoLoadingPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        filter: drop-shadow(0 8px 24px rgba(230, 57, 70, 0.4));
+    }
+
+    50% {
+        transform: scale(1.05);
+        filter: drop-shadow(0 12px 32px rgba(230, 57, 70, 0.6));
+    }
+}
+
+.loading-text {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--text-primary);
+    letter-spacing: 0.2em;
+    margin: 1.5rem 0;
+    /* Soft text, no extreme glows */
+    text-shadow: 0 4px 12px rgba(230, 57, 70, 0.3);
+    animation: textGlow 3s ease-in-out infinite alternate;
+}
+
+.loading-spinner {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 2rem;
+}
+
+.spinner-ring {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 2px solid transparent;
+    border-top-color: var(--crimson-primary);
+    border-right-color: rgba(230, 57, 70, 0.3);
+    border-radius: 50%;
+    animation: spinRing 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+}
+
+.spinner-ring:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.spinner-ring:nth-child(2) {
+    animation-delay: -0.2s;
+    border-right-color: transparent;
+    border-bottom-color: var(--crimson-bright);
+}
+
+.spinner-ring:nth-child(3) {
+    animation-delay: -0.4s;
+    border-right-color: transparent;
+    border-left-color: var(--text-primary);
+    opacity: 0.5;
+}
+
+.loading-tagline {
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    animation: fadeInOut 2.5s ease-in-out infinite;
+}
+
+/* Animations */
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes swordsPulse {
+
+    0%,
+    100% {
+        transform: scale(1) rotate(0deg);
+    }
+
+    50% {
+        transform: scale(1.1) rotate(5deg);
+    }
+}
+
+@keyframes textGlow {
+    from {
+        text-shadow:
+            0 0 10px var(--accent-color),
+            0 0 20px var(--accent-color),
+            0 0 40px var(--accent-color);
+    }
+
+    to {
+        text-shadow:
+            0 0 20px var(--accent-color),
+            0 0 40px var(--accent-color),
+            0 0 80px var(--accent-color);
+    }
+}
+
+@keyframes spinRing {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes fadeInOut {
+
+    0%,
+    100% {
+        opacity: 0.6;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .loading-swords {
+        font-size: 60px;
+    }
+
+    .loading-text {
+        font-size: 36px;
+        letter-spacing: 4px;
+    }
+
+    .loading-tagline {
+        font-size: 14px;
+    }
+}
